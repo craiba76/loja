@@ -52,7 +52,15 @@
     </style>
 </head>
 <body>
-    <div class="container" id="login-container">
+    <div class="container" id="register-container">
+        <h1>Cadastro</h1>
+        <input type="text" id="new-username" placeholder="Novo Usuário">
+        <input type="password" id="new-password" placeholder="Nova Senha">
+        <button onclick="register()">Cadastrar</button>
+        <button onclick="showLogin()">Já tenho uma conta</button>
+    </div>
+
+    <div class="container hidden" id="login-container">
         <h1>Login</h1>
         <input type="text" id="username" placeholder="Usuário">
         <input type="password" id="password" placeholder="Senha">
@@ -91,8 +99,26 @@
     </div>
     
     <script>
-        const users = [{ username: "admin", password: "1234" }];
+        let users = [{ username: "admin", password: "1234" }];
         const sales = [];
+
+        function register() {
+            const newUsername = document.getElementById("new-username").value;
+            const newPassword = document.getElementById("new-password").value;
+            if (newUsername && newPassword) {
+                users.push({ username: newUsername, password: newPassword });
+                alert("Usuário cadastrado com sucesso!");
+                document.getElementById("register-container").classList.add("hidden");
+                document.getElementById("login-container").classList.remove("hidden");
+            } else {
+                alert("Preencha todos os campos!");
+            }
+        }
+
+        function showLogin() {
+            document.getElementById("register-container").classList.add("hidden");
+            document.getElementById("login-container").classList.remove("hidden");
+        }
 
         function login() {
             const username = document.getElementById("username").value;
